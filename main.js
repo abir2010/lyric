@@ -8,10 +8,11 @@ const showLyric = () => {
         div.classList.add('single-result','row','align-items-center','my-3','py-3');
         div.innerHTML = `
         <div class="text-center px-5">
-            <h4>Search field cannot be empty !</h4>
+            <h5>Search field cannot be empty !</h5>
         </div>
         `;
         displayLyrics.appendChild(div);
+        return;
     }
     const url = `https://api.lyrics.ovh/suggest/${searchFieldValue}`;
     fetch(url)
@@ -26,7 +27,7 @@ const displayLyric = (data) => {
         div.classList.add('single-result','row','align-items-center','my-3','py-3');
         div.innerHTML = `
         <div class="text-center px-5">
-            <h4>No Lyrics Found for your search "${document.getElementById('search-field').value}"</h4>
+            <h5>No Lyrics Found for your search "${document.getElementById('search-field').value}"</h5>
         </div>
         `;
         displayLyrics.appendChild(div);
@@ -63,21 +64,16 @@ const lyrics = (data,artist,title) => {
     displayLyrics.textContent = '';
     const div = document.createElement('div');
     div.classList.add('lyric-result','row','align-items-center','my-3','py-3');
-    if(!data){    
-        div.innerHTML = `
-        <div class="text-center px-5">
-            <h3>Not Found</h3>
-        </div>
-        `;
-        displayLyrics.appendChild(div);
-        return;
-    }
     div.innerHTML = `
     <div class="text-center px-5">
         <h3>${title}</h3>
         <h5>By ${artist}</h5>
         <p>${data.lyrics}</p>
+        <button onclick="saveLyric('${data.lyrics}')" class="btn btn-outline-success">Save the Lyrics</button>
     </div>
     `;
     displayLyrics.appendChild(div);
+}
+const saveLyric = (info) => {
+    localStorage.setItem('lyrics',info);
 }
