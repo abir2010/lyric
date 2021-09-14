@@ -8,8 +8,9 @@ const showLyric = () => {
     searchField.value = '';
 }
 const displayLyric = (data) => {
+    const displayLyrics = document.getElementById('display-lyric');
+    displayLyrics.textContent = '';
     for(let i=0; i<data.length; i++){
-        const displayLyrics = document.getElementById('display-lyric');
         const div = document.createElement('div');
         div.classList.add('single-result','row','align-items-center','my-3','py-3')
         div.innerHTML = `
