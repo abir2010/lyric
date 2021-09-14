@@ -15,7 +15,7 @@ const displayLyric = (data) => {
         div.classList.add('single-result','row','align-items-center','my-3','py-3')
         div.innerHTML = `
             <div class="col-md-2 col-4">
-                <img class="img-fluid" src="${data[i].album.cover_medium}">
+                <img class="img-fluid rounded-3" src="${data[i].album.cover_medium}">
             </div>
             <div class="col-md-4 col-7">
                 <h4 class="lyrics-name">${data[i].title}</h4>
