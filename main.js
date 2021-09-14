@@ -69,11 +69,11 @@ const lyrics = (data,artist,title) => {
         <h3>${title}</h3>
         <h5>By ${artist}</h5>
         <p>${data.lyrics}</p>
-        <button onclick="saveLyric('${data.lyrics}')" class="btn btn-outline-success">Save the Lyrics</button>
+        <button onclick="saveLyric()" class="btn btn-outline-success">Save the Lyric</button>
     </div>
     `;
     displayLyrics.appendChild(div);
 }
-const saveLyric = (info) => {
-    localStorage.setItem('lyrics',info);
+const saveLyric = () => {
+    // localStorage.setItem('lyrics','kabir');
 }
