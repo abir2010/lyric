@@ -14,16 +14,25 @@ const displayLyric = (data) => {
         const div = document.createElement('div');
         div.classList.add('single-result','row','align-items-center','my-3','py-3')
         div.innerHTML = `
-            <div class="col-md-2">
+            <div class="col-md-2 col-4">
                 <img class="img-fluid" src="${data[i].album.cover_medium}">
             </div>
-            <div class="col-md-7">
+            <div class="col-md-4 col-7">
                 <h4 class="lyrics-name">${data[i].title}</h4>
                 <p class="author lead">Album by <span class="fw-bold">${data[i].artist.name}</span></p>
             </div>
-            <div class="col-md-3 text-md-right text-center">
-                <button id="lyric-btn" class="btn btn-success">Get Lyrics</button>
+            <div class="col-md-3 col-6 text-md-right text-center">
+                <button onclick="getlyric(${data[i].artist.name},${data[i].title})" class="btn btn-success">Get Lyrics</button>
+            </div>
+            <div class="col-md-3 col-6 text-md-right text-center">
+                <button onclick="listenSong(${data[i].link})" class="btn btn-success">Listen here</button>
             </div>`;
         displayLyrics.appendChild(div);
     }
+}
+const listenSong = (link) => {
+    window.location = link;
+}
+const getlyric = (artist,title) => {
+    console.log(artist,title);
 }
