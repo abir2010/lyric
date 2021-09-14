@@ -42,3 +42,8 @@ body{
 .single-result:hover {
     transform: scale(1.07);
 }
+.lyric-result{
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    transition: 0.5s;
+}
