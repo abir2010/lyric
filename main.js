@@ -1,19 +1,41 @@
 const showLyric = () => {
     const searchField = document.getElementById('search-field');
     const searchFieldValue = searchField.value;
+    if(searchFieldValue.length === 0){
+        const displayLyrics = document.getElementById('display-lyric');
+        displayLyrics.textContent = ''; 
+        const div = document.createElement('div');
+        div.classList.add('single-result','row','align-items-center','my-3','py-3');
+        div.innerHTML = `
+        <div class="text-center px-5">
+            <h4>Search field cannot be empty !</h4>
+        </div>
+        `;
+        displayLyrics.appendChild(div);
+    }
     const url = `https://api.lyrics.ovh/suggest/${searchFieldValue}`;
     fetch(url)
         .then(res => res.json())
         .then(data => displayLyric(data.data))
-    searchField.value = '';
 }
 const displayLyric = (data) => {
     const displayLyrics = document.getElementById('display-lyric');
-    if(displayLyrics != null || data){
+    if(data.length === 0){  
+        displayLyrics.textContent = ''; 
+        const div = document.createElement('div');
+        div.classList.add('single-result','row','align-items-center','my-3','py-3');
+        div.innerHTML = `
+        <div class="text-center px-5">
+            <h4>No Lyrics Found for your search "${document.getElementById('search-field').value}"</h4>
+        </div>
+        `;
+        displayLyrics.appendChild(div);
+    }
+    else if(displayLyrics != null){
         displayLyrics.textContent = '';
         for(let i=0; i<data.length; i++){
             const div = document.createElement('div');
-            div.classList.add('single-result','row','align-items-center','my-3','py-3')
+            div.classList.add('single-result','row','align-items-center','my-3','py-3');
             div.innerHTML = `
             <div class="col-md-2 col-4">
                 <img class="img-fluid rounded-3" src="${data[i].album.cover_medium}">
@@ -28,6 +50,7 @@ const displayLyric = (data) => {
             displayLyrics.appendChild(div);
         }
     }
+    document.getElementById('search-field').value = '';
 }
 const getlyric = (artist,title) => {
     const url2 = `https://api.lyrics.ovh/v1/${artist}/${title}`;
@@ -40,6 +63,15 @@ const lyrics = (data,artist,title) => {
     displayLyrics.textContent = '';
     const div = document.createElement('div');
     div.classList.add('lyric-result','row','align-items-center','my-3','py-3');
+    if(!data){    
+        div.innerHTML = `
+        <div class="text-center px-5">
+            <h3>Not Found</h3>
+        </div>
+        `;
+        displayLyrics.appendChild(div);
+        return;
+    }
     div.innerHTML = `
     <div class="text-center px-5">
         <h3>${title}</h3>
